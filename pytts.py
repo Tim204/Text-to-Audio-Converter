@@ -1,27 +1,58 @@
-# Python program to show
-# how to convert text to speech
-import pyttsx3
+#Importing Libraries
+#Importing Google Text to Speech library
+import os
 
-# Initialize the converter
-converter = pyttsx3.init()
+from gtts import gTTS
 
-# Set properties before adding
-# Things to say
+#Importing PDF reader PyPDF2
+import PyPDF2
 
-# Sets speed percent
-# Can be more than 100
-converter.setProperty('rate', 150)
-# Set volume 0-1
-converter.setProperty('volume', 0.7)
+#Open file Path
+pdf_File = open('Release Form.pdf', 'rb')
 
-# Queue the entered text
-# There will be a pause between
-# each one like a pause in
-# a sentence
-converter.say("Hello GeeksforGeeks")
-converter.say("I'm also a geek")
+#Create PDF Reader Object
+pdf_Reader = PyPDF2.PdfReader(pdf_File)
+count = len(pdf_Reader.pages) # counts number of pages in pdf
+textList = []
 
-# Empties the say() queue
-# Program will not continue
-# until all speech is done talking
-converter.runAndWait()
+#Extracting text data from each page of the pdf file
+for i in range(count):
+    page = pdf_Reader.pages[i]
+    textList.append(page.extract_text())
+
+
+#Converting multiline text to single line text
+textString = " ".join(textList)
+
+print(textString)
+
+#Set language to english (en)
+language = 'en'
+
+#Call GTTS
+myAudio = gTTS(text=textString, lang=language, slow=False)
+
+#Save as mp3 file
+myAudio.save("Audio.mp3")
+os.system("Audio.mp3")
+
+# importing required modules
+# import PyPDF2
+#
+# # creating a pdf file object
+# pdfFileObj = open('Release Form.pdf', 'rb')
+#
+# # creating a pdf reader object
+# pdfReader = PyPDF2.PdfReader(pdfFileObj)
+#
+# # printing number of pages in pdf file
+# print(len(pdfReader.pages))
+#
+# # creating a page object
+# pageObj = pdfReader.pages[0]
+#
+# # extracting text from page
+# print(pageObj.extract_text())
+#
+# # closing the pdf file object
+# pdfFileObj.close()
