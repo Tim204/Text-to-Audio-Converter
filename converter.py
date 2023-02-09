@@ -55,18 +55,22 @@ class PDFFileProcessor:
     def __init__(self, pdf_file):
         self._pdf_file = pdf_file
 
-    def open_pdf(self):
+    def generate_text_string(self):
+        text_string = " ".join(self._extract_content())
+        return text_string
+
+    def _open_pdf(self):
         return open(self._pdf_file, "rb")
 
-    def read_pdf(self):
-        pdf_reader = PyPDF2.PdfReader(self.open_pdf())
+    def _read_pdf(self):
+        pdf_reader = PyPDF2.PdfReader(self._open_pdf())
         return pdf_reader
 
-    def extract_content(self):
+    def _extract_content(self):
         content_list = []
-        page_count = len(self.read_pdf().pages)
+        page_count = len(self._read_pdf().pages)
         for page_number in range(page_count):
-            page = self.read_pdf().pages[page_number]
+            page = self._read_pdf().pages[page_number]
             content_list.append(page.extract_text())
         return content_list
 
@@ -80,10 +84,29 @@ class PDFtoTextConverter:
         self._filename = ""
 
     def convert(self):
-        pass
+        print("Converting PDF to Audio...")
+        self.set_str_obj()
+        self.set_filename()
+        converted = gTTS(self._string_obj, lang=self._language, slow=False)
+        converted.save(self._filename + ".mp3")
+        self.play()
 
-    def save(self, converted_file, file_name):
-        pass
+    def set_filename(self):
+        if self._filename is not None:
+            self._filename = input(f"File name: ")
+        return self._filename
+
+    def set_str_obj(self):
+        processor = PDFFileProcessor("Release Form.pdf")
+        self._string_obj = processor.generate_text_string()
+        return self._string_obj
+
+    def set_language(self, language):
+        self._language = language
+        return language
+
+    def play(self):
+        os.system(self._filename + ".mp3")
 
 
 def converter_app():
