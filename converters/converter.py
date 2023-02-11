@@ -1,4 +1,5 @@
 import os
+from gtts import gTTS
 from abc import ABC, abstractmethod
 
 
@@ -10,9 +11,12 @@ class Converter(ABC):
         self._language = self._DEFAULT_LANGUAGE
         self._filename = ""
 
-    @abstractmethod
-    def convert(self):
-        pass
+    def _start_conversion(self):
+        self._set_str_obj()
+        self.set_filename()
+        converted = gTTS(self._string_obj, lang=self._language, slow=False)
+        converted.save(self._filename + ".mp3")
+        self.play()
 
     def set_language(self, language):
         self._language = language
@@ -24,7 +28,7 @@ class Converter(ABC):
 
     def set_filename(self):
         if self._filename is not None:
-            self._filename = input(f"File name: ")
+            self._filename = input(f"File name: ").replace(" ", "_")
         return self._filename
 
     def play(self):
