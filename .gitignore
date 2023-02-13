@@ -1,3 +1,5 @@
 .gitignore
 *.mp3
 .pdf
+.doc
+.docx
