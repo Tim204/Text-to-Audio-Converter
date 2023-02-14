@@ -5,14 +5,18 @@ import docx
 
 class FileProcessor(ABC):
     def __init__(self, file):
-        self._file = file
+        self.file = file
 
-    @abstractmethod
-    def generate_text_string(self):
-        pass
+    def _generate_text_string(self):
+        text_string = '\n'.join(self._extract_content())
+        return text_string
 
     @abstractmethod
     def _extract_content(self):
+        pass
+
+    @abstractmethod
+    def _read_file(self):
         pass
 
 
@@ -22,7 +26,7 @@ class PDFFileProcessor:
         self._pdf_file = pdf_file
 
     def generate_text_string(self):
-        text_string = " ".join(self._extract_content())
+        text_string = '\n'.join(self._extract_content())
         return text_string
 
     def _open_pdf(self):
@@ -54,7 +58,6 @@ class DocxFileProcessor:
 
         for paragraph in self._read_docx().paragraphs:
             content_list.append(paragraph.text)
-            print(content_list)
         return content_list
 
     def _read_docx(self):

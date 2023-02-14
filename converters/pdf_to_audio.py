@@ -16,3 +16,7 @@ class PDFtoTextConverter(Converter):
         processor = PDFFileProcessor(fd.askopenfilename())
         self._string_obj = processor.generate_text_string()
         return self._string_obj
+
+
+pd = PDFtoTextConverter()
+pd.convert_file()
