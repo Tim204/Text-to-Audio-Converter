@@ -1,6 +1,6 @@
 from tkinter import filedialog as fd
 from converters.converter import Converter
-from converters.file_processors.docx_processor import DocxFileProcessor
+from file_processors.docx_processor import DocxFileProcessor
 
 
 class DocxToAudioConverter(Converter):

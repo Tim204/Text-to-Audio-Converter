@@ -1,4 +1,4 @@
-from converters.file_processors.processors_interface import FileProcessor
+from file_processors.processors_interface import FileProcessor
 import PyPDF2
 
 

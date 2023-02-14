@@ -1,5 +1,5 @@
 from converters.converter import Converter
-from converters.file_processors.pdf_processor import PDFFileProcessor
+from file_processors.pdf_processor import PDFFileProcessor
 from tkinter import filedialog as fd
 
 
