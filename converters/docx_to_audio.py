@@ -1,6 +1,6 @@
 from tkinter import filedialog as fd
 from converters.converter import Converter
-from converters.file_processors import DocxFileProcessor
+from converters.file_processors.docx_processor import DocxFileProcessor
 
 
 class DocxToAudioConverter(Converter):
@@ -14,7 +14,7 @@ class DocxToAudioConverter(Converter):
 
     def _set_str_obj(self):
         processor = DocxFileProcessor(fd.askopenfilename())
-        self._string_obj = processor.generate_text_string()
+        self._string_obj = processor.get_test_string()
         return self._string_obj
 
 

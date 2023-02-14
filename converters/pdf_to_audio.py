@@ -1,5 +1,5 @@
 from converters.converter import Converter
-from converters.file_processors import PDFFileProcessor
+from converters.file_processors.pdf_processor import PDFFileProcessor
 from tkinter import filedialog as fd
 
 
@@ -14,9 +14,5 @@ class PDFtoTextConverter(Converter):
 
     def _set_str_obj(self):
         processor = PDFFileProcessor(fd.askopenfilename())
-        self._string_obj = processor.generate_text_string()
+        self._string_obj = processor.get_text_string()
         return self._string_obj
-
-
-pd = PDFtoTextConverter()
-pd.convert_file()
