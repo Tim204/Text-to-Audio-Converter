@@ -14,5 +14,12 @@ class PDFtoTextConverter(Converter):
 
     def _set_str_obj(self):
         processor = PDFFileProcessor(fd.askopenfilename())
-        self._string_obj = processor.get_text_string()
+        try:
+            self._string_obj = processor.get_text_string()
+        except FileNotFoundError:
+            print("No valid file provided")
         return self._string_obj
+
+
+c = PDFtoTextConverter()
+c.convert_file()

@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+
+import urllib3.exceptions
 from gtts import gTTS
 import os
 
@@ -14,9 +16,12 @@ class Converter(ABC):
     def _start_conversion(self):
         self._set_str_obj()
         self.set_filename()
-        converted = gTTS(self._string_obj, lang=self._language, slow=False)
-        converted.save(self._filename + ".mp3")
-        self.play()
+        try:
+            converted = gTTS(self._string_obj, lang=self._language, slow=False)
+            converted.save(self._filename + ".mp3")
+            self.play()
+        except AssertionError:
+            print("No text file provided, exiting the program... ")
 
     def set_language(self, language):
         self._language = language

@@ -18,5 +18,3 @@ class DocxToAudioConverter(Converter):
         return self._string_obj
 
 
-dox = DocxToAudioConverter()
-dox.convert_file()
