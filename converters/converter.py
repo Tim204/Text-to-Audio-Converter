@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
-
-import urllib3.exceptions
+from network_status.connectivity_cheker import ConnectivityChecker
 from gtts import gTTS
 import os
 
 
 class Converter(ABC):
     _DEFAULT_LANGUAGE = "en"
+    _NETWORK_CONNECTION = ConnectivityChecker()
 
     def __init__(self):
         self._string_obj = ""
@@ -14,14 +14,20 @@ class Converter(ABC):
         self._filename = ""
 
     def _start_conversion(self):
-        self._set_str_obj()
-        self.set_filename()
-        try:
-            converted = gTTS(self._string_obj, lang=self._language, slow=False)
-            converted.save(self._filename + ".mp3")
-            self.play()
-        except AssertionError:
-            print("No text file provided, exiting the program... ")
+        if self._NETWORK_CONNECTION.check_connection():
+            self._set_str_obj()
+            self.set_filename()
+            try:
+                converted = gTTS(self._string_obj, lang=self._language, slow=False)
+                converted.save(self._filename + ".mp3")
+                self.play()
+            except AssertionError:
+                print("No text file provided, exiting the program... ")
+            else:
+                print("An error has occurred. Make sure that you're connected to the internet")
+
+        else:
+            print("No internet connection. \nPlease connect to the internet before proceeding")
 
     def set_language(self, language):
         self._language = language
