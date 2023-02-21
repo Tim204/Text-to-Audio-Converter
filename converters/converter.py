@@ -14,7 +14,7 @@ class Converter(ABC):
         self._filename = ""
 
     def _start_conversion(self):
-        if self._NETWORK_CONNECTION.check_connection():
+        if self._NETWORK_CONNECTION.is_connected():
             self._set_str_obj()
             self.set_filename()
             try:
@@ -22,10 +22,9 @@ class Converter(ABC):
                 converted.save(self._filename + ".mp3")
                 self.play()
             except AssertionError:
-                print("No text file provided, exiting the program... ")
-            else:
-                print("An error has occurred. Make sure that you're connected to the internet")
-
+                print("""An error occurred.
+                Make sure the file or text you provided is not empty
+                """)
         else:
             print("No internet connection. \nPlease connect to the internet before proceeding")
 
