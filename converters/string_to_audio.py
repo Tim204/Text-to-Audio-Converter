@@ -6,7 +6,7 @@ class StringToAudioConverter(Converter):
         super().__init__()
 
     def convert_file(self):
-        print("Converting String to Audio...")
+        print("Converting Text String to Audio:")
         self._start_conversion()
 
     def _set_str_obj(self):

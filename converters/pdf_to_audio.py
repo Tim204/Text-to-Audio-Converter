@@ -7,13 +7,16 @@ class PDFtoTextConverter(Converter):
 
     def __init__(self):
         super().__init__()
+        self._file_types = (
+            ("pdf files", "*.pdf"),
+        )
 
     def convert_file(self):
         print("Converting PDF to Audio...")
         self._start_conversion()
 
     def _set_str_obj(self):
-        processor = PDFFileProcessor(fd.askopenfilename())
+        processor = PDFFileProcessor(fd.askopenfilename(filetypes=self._file_types))
         try:
             self._string_obj = processor.get_text_string()
         except FileNotFoundError:

@@ -14,19 +14,18 @@ class Converter(ABC):
         self._filename = ""
 
     def _start_conversion(self):
-        if self._NETWORK_CONNECTION.is_connected():
+        # if self._NETWORK_CONNECTION.is_connected():
             self._set_str_obj()
             self.set_filename()
             try:
                 converted = gTTS(self._string_obj, lang=self._language, slow=False)
                 converted.save(self._filename + ".mp3")
                 self.play()
-            except AssertionError:
-                print("""An error occurred.
-                Make sure the file or text you provided is not empty
+            except:
+                print("""An error occurred.\n\nMake sure the file or text you provided is not empty
                 """)
-        else:
-            print("No internet connection. \nPlease connect to the internet before proceeding")
+        # else:
+        #     print("No internet connection. \nPlease connect to the internet before proceeding")
 
     def set_language(self, language):
         self._language = language
