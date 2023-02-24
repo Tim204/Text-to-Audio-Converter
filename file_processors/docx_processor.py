@@ -7,7 +7,7 @@ class DocxFileProcessor(FileProcessor):
     def __init__(self, file):
         super().__init__(file)
 
-    def get_test_string(self):
+    def get_text_string(self):
         return self._generate_text_string()
 
     def _extract_content(self):

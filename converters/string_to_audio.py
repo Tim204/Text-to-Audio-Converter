@@ -14,6 +14,9 @@ class StringToAudioConverter(Converter):
             self._string_obj = input("Enter your string here: ")
         return self._string_obj
 
+    def __str__(self):
+        return "Text sting to audio"
+
 
 st = StringToAudioConverter()
 st.convert_file()

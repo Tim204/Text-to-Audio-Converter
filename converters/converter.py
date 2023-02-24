@@ -7,6 +7,7 @@ import os
 class Converter(ABC):
     _DEFAULT_LANGUAGE = "en"
     _NETWORK_CONNECTION = ConnectivityChecker()
+    _file_format = ".mp3"
 
     def __init__(self):
         self._string_obj = ""
@@ -19,13 +20,14 @@ class Converter(ABC):
         self.set_filename()
         self.convert(self._string_obj)
         self.save_file(self._converted_file)
-        self.play(self._converted_file)
+        self.play(self._filename)
 
     def convert(self, str_object):
         if self._NETWORK_CONNECTION.is_connected():
             self._converted_file = gTTS(str_object, lang=self._language, slow=False)
         else:
-            print("Please ensure that you are connected to the internet")
+            exit(f"Unable to convert {self.__class__.__str__(self)}."
+                 f"\nYou need to connect to the internet in order to perform the conversion")
 
     def set_language(self, language):
         self._language = language
@@ -37,7 +39,7 @@ class Converter(ABC):
 
     def save_file(self, converted_file):
         if self._filename != "":
-            converted_file.save(self._filename)
+            self._converted_file = converted_file.save(self._filename + self._file_format)
 
     def set_filename(self):
         while self._filename == "":
@@ -45,4 +47,4 @@ class Converter(ABC):
         return self._filename
 
     def play(self, filename):
-        os.system(filename)
+        os.system(filename + self._file_format)

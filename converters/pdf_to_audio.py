@@ -25,6 +25,9 @@ class PDFtoTextConverter(Converter):
                 exit()
             return self._string_obj
 
+    def __str__(self):
+        return "PDF file to audio"
+
 
 c = PDFtoTextConverter()
 c.convert_file()
