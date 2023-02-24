@@ -16,13 +16,14 @@ class Converter(ABC):
         self._converted_file = None
 
     def _start_conversion(self):
+        print(f"Converting {self.__class__.__str__(self)}")
         self._set_str_obj()
         self.set_filename()
-        self.convert(self._string_obj)
+        self._convert(self._string_obj)
         self.save_file(self._converted_file)
         self.play(self._filename)
 
-    def convert(self, str_object):
+    def _convert(self, str_object):
         if self._NETWORK_CONNECTION.is_connected():
             self._converted_file = gTTS(str_object, lang=self._language, slow=False)
         else:
@@ -43,7 +44,7 @@ class Converter(ABC):
 
     def set_filename(self):
         while self._filename == "":
-            self._filename = input(f"File name: ").replace(" ", "_")
+            self._filename = input("File name: ").replace(" ", "_")
         return self._filename
 
     def play(self, filename):

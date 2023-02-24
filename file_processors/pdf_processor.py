@@ -1,12 +1,15 @@
 from file_processors.processors_interface import FileProcessor
+from tkinter import filedialog as fd
 import PyPDF2
 
 
 class PDFFileProcessor(FileProcessor):
-    """A PDF processing class"""
 
-    def __init__(self, file):
-        super().__init__(file)
+    def __init__(self):
+        super().__init__()
+        self._file_types = (
+            ("pdf files", "*.pdf"),
+        )
 
     def get_text_string(self):
         return self._generate_text_string()
@@ -25,3 +28,9 @@ class PDFFileProcessor(FileProcessor):
     def _read_file(self):
         pdf_reader = PyPDF2.PdfReader(self._open_pdf())
         return pdf_reader
+
+    def get_file(self):
+        self._file = fd.askopenfilename(filetypes=self._file_types)
+        return self._file
+
+
