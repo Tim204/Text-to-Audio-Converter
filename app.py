@@ -3,10 +3,13 @@ from converters.pdf_to_audio import PDFtoTextConverter
 from converters.string_to_audio import StringToAudioConverter
 
 
-def converter_app():
-    converters = [StringToAudioConverter(), PDFtoTextConverter(), DocxToAudioConverter()]
-    for converter in converters:
-        converter.convert_file()
+class ConverterApp:
+    def __init__(self, conversion_type):
+        self._ct = conversion_type
+
+    def convert(self):
+        self._ct.convert_file()
 
 
-converter_app()
+ca = ConverterApp(StringToAudioConverter())
+ca.convert()

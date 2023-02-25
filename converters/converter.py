@@ -6,26 +6,26 @@ import os
 
 class Converter(ABC):
     _DEFAULT_LANGUAGE = "en"
-    _NETWORK_CONNECTION = ConnectivityChecker()
+    _network_status = ConnectivityChecker()
     _file_format = ".mp3"
 
     def __init__(self):
         self._string_obj = ""
         self._language = self._DEFAULT_LANGUAGE
         self._filename = ""
-        self._converted_file = None
+        self._audio_file = None
 
     def _start_conversion(self):
         print(f"Converting {self.__class__.__str__(self)}")
         self._set_str_obj()
         self.set_filename()
         self._convert(self._string_obj)
-        self.save_file(self._converted_file)
+        self.save_file(self._audio_file)
         self.play(self._filename)
 
     def _convert(self, str_object):
-        if self._NETWORK_CONNECTION.is_connected():
-            self._converted_file = gTTS(str_object, lang=self._language, slow=False)
+        if self._network_status.is_connected():
+            self._audio_file = gTTS(str_object, lang=self._language, slow=False)
         else:
             exit(f"Unable to convert {self.__class__.__str__(self)}."
                  f"\nYou need to connect to the internet in order to perform the conversion")
@@ -38,9 +38,9 @@ class Converter(ABC):
     def _set_str_obj(self):
         pass
 
-    def save_file(self, converted_file):
+    def save_file(self, audio_file):
         if self._filename != "":
-            self._converted_file = converted_file.save(self._filename + self._file_format)
+            self._audio_file = audio_file.save(self._filename + self._file_format)
 
     def set_filename(self):
         while self._filename == "":
