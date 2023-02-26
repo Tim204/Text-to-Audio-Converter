@@ -25,6 +25,7 @@ class Converter(ABC):
 
     def _convert(self, str_object):
         if self._network_status.is_connected():
+            print(f"\nConverting '{self._filename}' to audio...")
             self._audio_file = gTTS(str_object, lang=self._language, slow=False)
         else:
             exit(f"Unable to convert {self.__class__.__str__(self)}."
@@ -40,7 +41,9 @@ class Converter(ABC):
 
     def save_file(self, audio_file):
         if self._filename != "":
+            print("Saving file...")
             self._audio_file = audio_file.save(self._filename + self._file_format)
+            print("Done!")
 
     def set_filename(self):
         while self._filename == "":
