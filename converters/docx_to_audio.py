@@ -17,7 +17,7 @@ class DocxToAudioConverter(Converter):
             try:
                 self._string_obj = processor.get_text_string()
             except:
-                print("No valid file provided")
+                print("\nOperation Cancelled")
                 exit()
         return self._string_obj
 

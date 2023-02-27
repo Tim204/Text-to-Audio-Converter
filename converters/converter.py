@@ -41,9 +41,8 @@ class Converter(ABC):
 
     def save_file(self, audio_file):
         if self._filename != "":
-            print("Saving file...")
             self._audio_file = audio_file.save(self._filename + self._file_format)
-            print("Done!")
+            print(f"\n{self._filename} successfully converted!")
 
     def set_filename(self):
         while self._filename == "":
