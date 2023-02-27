@@ -11,5 +11,5 @@ class ConverterApp:
         self._ct.convert_file()
 
 
-ca = ConverterApp(PDFtoTextConverter())
+ca = ConverterApp(StringToAudioConverter())
 ca.convert()

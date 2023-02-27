@@ -1,6 +1,7 @@
 from file_processors.processors_interface import FileProcessor
 from tkinter import filedialog as fd
 import docx
+import os
 
 
 class DocxFileProcessor(FileProcessor):
@@ -27,3 +28,8 @@ class DocxFileProcessor(FileProcessor):
     def get_file(self):
         self._file = fd.askopenfilename(filetypes=self._file_types)
         return self._file
+
+    def get_file_name(self):
+        file_name = os.path.basename(self._file)
+        return os.path.splitext(file_name)[0]
+

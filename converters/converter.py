@@ -46,7 +46,10 @@ class Converter(ABC):
 
     def set_filename(self):
         while self._filename == "":
-            self._filename = input("File name: ").replace(" ", "_")
+            try:
+                self._filename = input("Define a filename: ").replace(" ", "_")
+            except:
+                print("Names cannot contain any of the following characters:\n\ / : * ? ' < > |" )
         return self._filename
 
     def play(self, filename):
