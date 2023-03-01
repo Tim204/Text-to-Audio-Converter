@@ -1,4 +1,5 @@
 from converters.converter import Converter
+from validators.filename_validator import FilenameValidator
 
 
 class StringToAudioConverter(Converter):
@@ -12,6 +13,17 @@ class StringToAudioConverter(Converter):
         while self._string_obj == "":
             self._string_obj = input("Enter your text here: ")
         return self._string_obj
+
+    def set_filename(self):
+        validator = FilenameValidator()
+        while self._filename == "":
+            mp3_filename = input("Define a filename: ").replace(" ", "_")
+            if validator.is_valid(mp3_filename):
+                self._filename = mp3_filename
+            else:
+                print(f"Filenames should not contain any of the following: {str(validator.get_special_chars())}\n")
+                self._filename = ""
+        return self._filename
 
     def __str__(self):
         return "Text sting to audio"

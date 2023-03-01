@@ -8,7 +8,6 @@ class Converter(ABC):
     _DEFAULT_LANGUAGE = "en"
     _network_status = ConnectivityChecker()
     _file_format = ".mp3"
-    _special_chars = ["?", "/", ":", "~"]
 
     def __init__(self):
         self._string_obj = ""
@@ -45,11 +44,8 @@ class Converter(ABC):
             self._audio_file = audio_file.save(self._filename + self._file_format)
             print(f"\n{self._filename} successfully converted!")
 
+    @abstractmethod
     def set_filename(self):
-        while self._filename == "":
-            self._filename = input("Define a filename: ").replace(" ", "_")
-
-    def _authenticate_filename(self):
         pass
 
     def play(self, filename):

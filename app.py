@@ -11,7 +11,7 @@ class ConverterApp:
         self._ct.convert_file()
 
 
-ca = ConverterApp(DocxToAudioConverter())
+ca = ConverterApp(PDFtoTextConverter())
 ca.convert()
 
 # chars = ["o", "o"]
