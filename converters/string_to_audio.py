@@ -18,10 +18,10 @@ class StringToAudioConverter(Converter):
         validator = FilenameValidator()
         while self._filename == "":
             mp3_filename = input("Define a filename: ").replace(" ", "_")
-            if validator.is_valid(mp3_filename):
+            if validator.validate_filename(mp3_filename):
                 self._filename = mp3_filename
             else:
-                print(f"Filenames should not contain any of the following: {str(validator.get_special_chars())}\n")
+                print(f"Filenames should not contain any of the following characters: {validator.get_special_chars()}\n")
                 self._filename = ""
         return self._filename
 

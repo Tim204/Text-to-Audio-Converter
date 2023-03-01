@@ -11,14 +11,6 @@ class ConverterApp:
         self._ct.convert_file()
 
 
-ca = ConverterApp(PDFtoTextConverter())
+ca = ConverterApp(DocxToAudioConverter())
 ca.convert()
-
-# chars = ["o", "o"]
-# word = "Hello"
-# has_all = "my space" if any([char not in word for char in chars]) else "all lies"
-# chars = ["a"]
-# word = "Hello"
-# has_all = "valid" if not any([char in word for char in chars]) else "not valid"
-# print(has_all)
 

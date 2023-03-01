@@ -22,11 +22,11 @@ class DocxToAudioConverter(Converter):
         return self._string_obj
 
     def set_filename(self):
-        self._filename = self._processor.get_file_name()
+        self._filename = self._processor.get_file_name().replace(" ", "_")
         return self._filename
 
     def __str__(self):
-        return "Word document to audio."
+        return "Word document to audio"
 
 
 

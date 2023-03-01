@@ -16,7 +16,7 @@ class Converter(ABC):
         self._audio_file = None
 
     def _start_conversion(self):
-        print(f"Converting {self.__class__.__str__(self)}")
+        print(f"{self.__class__.__str__(self)} conversion.")
         self._set_str_obj()
         self.set_filename()
         self._convert(self._string_obj)
@@ -42,7 +42,7 @@ class Converter(ABC):
     def save_file(self, audio_file):
         if self._filename != "":
             self._audio_file = audio_file.save(self._filename + self._file_format)
-            print(f"\n{self._filename} successfully converted!")
+            print(f"\n'{self._filename}' successfully converted to audio!")
 
     @abstractmethod
     def set_filename(self):

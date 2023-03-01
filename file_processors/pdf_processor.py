@@ -38,5 +38,3 @@ class PDFFileProcessor(FileProcessor):
         file_name = os.path.basename(self._file)
         return os.path.splitext(file_name)[0]
 
-
-

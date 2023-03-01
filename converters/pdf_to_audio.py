@@ -22,7 +22,7 @@ class PDFtoTextConverter(Converter):
             return self._string_obj
 
     def set_filename(self):
-        self._filename = self._processor.get_file_name()
+        self._filename = self._processor.get_file_name().replace(" ", "_")
         return self._filename
 
     def __str__(self):
