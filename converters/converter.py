@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from network_status.connectivity_cheker import ConnectivityChecker
 from gtts import gTTS
+import subprocess
 import os
 
 

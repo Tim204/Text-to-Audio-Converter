@@ -17,7 +17,7 @@ class StringToAudioConverter(Converter):
     def set_filename(self):
         validator = FilenameValidator()
         while self._filename == "":
-            mp3_filename = input("Define a filename: ").replace(" ", "_")
+            mp3_filename = input("Define a filename: ")
             if validator.validate_filename(mp3_filename):
                 self._filename = mp3_filename
             else:
@@ -28,3 +28,6 @@ class StringToAudioConverter(Converter):
     def __str__(self):
         return "Text sting to audio"
 
+
+sa = StringToAudioConverter()
+sa.convert_file()
