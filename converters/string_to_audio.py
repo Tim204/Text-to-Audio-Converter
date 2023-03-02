@@ -29,5 +29,3 @@ class StringToAudioConverter(Converter):
         return "Text sting to audio"
 
 
-sa = StringToAudioConverter()
-sa.convert_file()
