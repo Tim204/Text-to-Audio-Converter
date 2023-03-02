@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from network_status.connectivity_cheker import ConnectivityChecker
 from gtts import gTTS
-import subprocess
 import os
 
 
@@ -50,4 +49,4 @@ class Converter(ABC):
         pass
 
     def play(self, filename):
-        os.system(filename + self._file_format)
+        os.startfile(filename + self._file_format)
